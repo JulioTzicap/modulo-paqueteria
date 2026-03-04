@@ -16,3 +16,7 @@
 ```bash
 git clone https://github.com/JulioTzicap/modulo-paqueteria.git
 cd modulo-paqueteria
+
+
+2. Ejecutar comando
+npm install
