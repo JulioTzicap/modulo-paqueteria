@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('Usuario', {
+  return sequelize.define('Repartidore', {
     id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
@@ -10,15 +10,10 @@ module.exports = function(sequelize, DataTypes) {
     nombre: {
       type: DataTypes.STRING(100),
       allowNull: false
-    },
-    tipoUsuario: {
-      type: DataTypes.ENUM('emisor','receptor'),
-      allowNull: false,
-      field: 'tipo_usuario'
     }
   }, {
     sequelize,
-    tableName: 'usuarios',
+    tableName: 'repartidores',
     timestamps: true,
     indexes: [
       {
