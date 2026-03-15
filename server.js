@@ -1,20 +1,10 @@
-const express = require('express');
-const cors = require('cors');
 require('dotenv').config();
 
+const app = require('./src/app');
 const sequelize = require('./src/config/database');
 const initModels = require('./src/models/init-models');
 
 const models = initModels(sequelize);
-
-const app = express();
-
-app.use(cors());
-app.use(express.json());
-
-app.get('/', (req, res) => {
-  res.send('Servicio de Paquetería funcionando');
-});
 
 sequelize.authenticate()
   .then(() => {
