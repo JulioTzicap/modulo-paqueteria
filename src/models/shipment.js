@@ -73,8 +73,8 @@ module.exports = function(sequelize, DataTypes) {
     sequelize,
     tableName: 'shipment',
     timestamps: true,
-    createdAt: 'created_at',   // <<<<<< nombre real en tu DB
-    updatedAt: 'updated_at',   // <<<<<< nombre real en tu DB
+    createdAt: 'created_at',   
+    updatedAt: 'updated_at',   
     indexes: [
       {
         name: "PRIMARY",
