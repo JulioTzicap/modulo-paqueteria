@@ -1,32 +1,33 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('Usuario', {
-    id: {
+  return sequelize.define('User', {
+    idUser: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true
+      primaryKey: true,
+      field: 'id_user'
     },
-    nombre: {
+    name: {
       type: DataTypes.STRING(100),
       allowNull: false
     },
-    tipoUsuario: {
-      type: DataTypes.ENUM('emisor','receptor'),
-      allowNull: false,
-      field: 'tipo_usuario'
+    status: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+      defaultValue: 1
     }
   }, {
     sequelize,
-    tableName: 'usuarios',
-    timestamps: true,
+    tableName: 'user',
+    timestamps: false,
     indexes: [
       {
         name: "PRIMARY",
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "id" },
+          { name: "id_user" },
         ]
       },
     ]

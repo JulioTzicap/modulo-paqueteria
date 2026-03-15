@@ -1,31 +1,37 @@
 var DataTypes = require("sequelize").DataTypes;
-var _Direccione = require("./direccione");
-var _Paquete = require("./paquete");
-var _Repartidore = require("./repartidore");
-var _Usuario = require("./usuario");
+var _Address = require("./address");
+var _Courier = require("./courier");
+var _Package = require("./package");
+var _Price = require("./price");
+var _Shipment = require("./shipment");
+var _User = require("./user");
 
 function initModels(sequelize) {
-  var Direccione = _Direccione(sequelize, DataTypes);
-  var Paquete = _Paquete(sequelize, DataTypes);
-  var Repartidore = _Repartidore(sequelize, DataTypes);
-  var Usuario = _Usuario(sequelize, DataTypes);
+  var Address = _Address(sequelize, DataTypes);
+  var Courier = _Courier(sequelize, DataTypes);
+  var Package = _Package(sequelize, DataTypes);
+  var Price = _Price(sequelize, DataTypes);
+  var Shipment = _Shipment(sequelize, DataTypes);
+  var User = _User(sequelize, DataTypes);
 
-  Paquete.belongsTo(Direccione, { as: "direccionEnvio", foreignKey: "direccionEnvioId"});
-  Direccione.hasMany(Paquete, { as: "paquetes", foreignKey: "direccionEnvioId"});
-  Paquete.belongsTo(Direccione, { as: "direccionRecepcion", foreignKey: "direccionRecepcionId"});
-  Direccione.hasMany(Paquete, { as: "direccionRecepcionPaquetes", foreignKey: "direccionRecepcionId"});
-  Paquete.belongsTo(Repartidore, { as: "repartidor", foreignKey: "repartidorId"});
-  Repartidore.hasMany(Paquete, { as: "paquetes", foreignKey: "repartidorId"});
-  Paquete.belongsTo(Usuario, { as: "emisor", foreignKey: "emisorId"});
-  Usuario.hasMany(Paquete, { as: "paquetes", foreignKey: "emisorId"});
-  Paquete.belongsTo(Usuario, { as: "receptor", foreignKey: "receptorId"});
-  Usuario.hasMany(Paquete, { as: "receptorPaquetes", foreignKey: "receptorId"});
+  Shipment.belongsTo(Courier, { as: "courier", foreignKey: "courierId"});
+  Courier.hasMany(Shipment, { as: "shipments", foreignKey: "courierId"});
+  Package.belongsTo(Shipment, { as: "idShipmentShipment", foreignKey: "idShipment"});
+  Shipment.hasMany(Package, { as: "packages", foreignKey: "idShipment"});
+  Address.belongsTo(User, { as: "idUserUser", foreignKey: "idUser"});
+  User.hasMany(Address, { as: "addresses", foreignKey: "idUser"});
+  Shipment.belongsTo(User, { as: "sender", foreignKey: "senderId"});
+  User.hasMany(Shipment, { as: "shipments", foreignKey: "senderId"});
+  Shipment.belongsTo(User, { as: "receiver", foreignKey: "receiverId"});
+  User.hasMany(Shipment, { as: "receiverShipments", foreignKey: "receiverId"});
 
   return {
-    Direccione,
-    Paquete,
-    Repartidore,
-    Usuario,
+    Address,
+    Courier,
+    Package,
+    Price,
+    Shipment,
+    User,
   };
 }
 module.exports = initModels;
